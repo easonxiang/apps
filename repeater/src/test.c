@@ -170,9 +170,11 @@ static int cmd_uart(const struct shell *shell, size_t argc, char **argv)
 		return -1;
 	}
 
+#ifdef CONFIG_UART_INTERRUPT_DRIVEN
 	uart_irq_rx_enable(uart);
 
 	uart_fifo_fill(uart, str, strlen(str));
+#endif
 
 	shell_fprintf(shell, SHELL_NORMAL,
 			"test uart %s finish.\n", UART_2);
